@@ -10,10 +10,13 @@ class testApp : public ofBaseApp{
 
 	ofEasyCam	cam;
 	ofxAutoReloadedShader*   shader;
-	ofxAutoReloadedShader*   dofShader;
+	ofxAutoReloadedShader*   dofShaderH;
+	ofxAutoReloadedShader*   dofShaderV;
 	ofMaterial	mMatMainMaterial;
 
 	ofFbo		fbo;
+	ofFbo		ping;
+	ofFbo		pong;
 
 	ofVec3f		lightPos;
 	ofLight		light;

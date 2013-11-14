@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		22B0C324160B8AD600F94B1F /* phong.frag in Sources */ = {isa = PBXBuildFile; fileRef = 22B0C317160B8AD600F94B1F /* phong.frag */; };
 		22B0C325160B8AD600F94B1F /* phong.vert in Sources */ = {isa = PBXBuildFile; fileRef = 22B0C319160B8AD600F94B1F /* phong.vert */; };
-		BB18CD6318353A1A003F0805 /* dof.frag in Sources */ = {isa = PBXBuildFile; fileRef = BB18CD6118353A1A003F0805 /* dof.frag */; };
-		BB18CD6418353A1A003F0805 /* dof.vert in Sources */ = {isa = PBXBuildFile; fileRef = BB18CD6218353A1A003F0805 /* dof.vert */; };
 		BB696BCB1777AF1300C7D0D9 /* ofxRemoteUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB696B521777AF1300C7D0D9 /* ofxRemoteUI.cpp */; };
 		BB696BCC1777AF1300C7D0D9 /* ofxRemoteUIClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB696B541777AF1300C7D0D9 /* ofxRemoteUIClient.cpp */; };
 		BB696BCD1777AF1300C7D0D9 /* ofxRemoteUIServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB696B561777AF1300C7D0D9 /* ofxRemoteUIServer.cpp */; };
@@ -87,8 +85,6 @@
 /* Begin PBXFileReference section */
 		22B0C317160B8AD600F94B1F /* phong.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		22B0C319160B8AD600F94B1F /* phong.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = phong.vert; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		BB18CD6118353A1A003F0805 /* dof.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = dof.frag; sourceTree = "<group>"; };
-		BB18CD6218353A1A003F0805 /* dof.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = dof.vert; sourceTree = "<group>"; };
 		BB696B4C1777AF1300C7D0D9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		BB696B521777AF1300C7D0D9 /* ofxRemoteUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRemoteUI.cpp; sourceTree = "<group>"; };
 		BB696B531777AF1300C7D0D9 /* ofxRemoteUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRemoteUI.h; sourceTree = "<group>"; };
@@ -198,8 +194,6 @@
 		22B0C30C160B8AD600F94B1F /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				BB18CD6118353A1A003F0805 /* dof.frag */,
-				BB18CD6218353A1A003F0805 /* dof.vert */,
 				22B0C317160B8AD600F94B1F /* phong.frag */,
 				22B0C319160B8AD600F94B1F /* phong.vert */,
 			);
@@ -595,10 +589,8 @@
 				BB696C061777B34E00C7D0D9 /* UdpSocket.cpp in Sources */,
 				BB696C071777B34E00C7D0D9 /* NetworkingUtilsWin.cpp in Sources */,
 				BB696C081777B34E00C7D0D9 /* UdpSocketWin.cpp in Sources */,
-				BB18CD6318353A1A003F0805 /* dof.frag in Sources */,
 				BB696C091777B34E00C7D0D9 /* OscOutboundPacketStream.cpp in Sources */,
 				BB696C0A1777B34E00C7D0D9 /* OscPrintReceivedElements.cpp in Sources */,
-				BB18CD6418353A1A003F0805 /* dof.vert in Sources */,
 				BB696C0B1777B34E00C7D0D9 /* OscReceivedElements.cpp in Sources */,
 				BB696C0C1777B34E00C7D0D9 /* OscTypes.cpp in Sources */,
 				BB696C0D1777B34E00C7D0D9 /* ofxOscBundle.cpp in Sources */,

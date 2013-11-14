@@ -39,23 +39,24 @@ void main( void ){
 	float d;
 	vec2 loc;
 	
-	dLoc = vec2(x - 4.0 * blurSize, y);
+	dLoc = vec2(x, y - 4.0 * blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
-	loc = vec2(x - 4.0 * blurSize * d, y); // tex neigtbor sample
+	loc = vec2(x , y - 4.0 * blurSize * d); // tex neigtbor sample
 	sum += blurGain * texture2D(tex, loc) * 0.05;
 	
-	dLoc = vec2(x - 3.0 * blurSize, y);
+	dLoc = vec2(x, y  - 3.0 * blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
-	loc = vec2(x - 3.0 * blurSize * d, y); // tex neigtbor sample
+	loc = vec2(x , y - 3.0 * blurSize * d); // tex neigtbor sample
 	sum += blurGain * texture2D(tex, loc) * 0.09;
 	
-	dLoc = vec2(x - 2.0 * blurSize, y);
+	dLoc = vec2(x , y - 2.0 * blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
-	loc = vec2(x - 2.0 * blurSize * d, y);
+	loc = vec2(x, y  - 2.0 * blurSize * d);
 	sum += blurGain * texture2D(tex, loc ) * 0.12;
 	
-	dLoc = vec2(x - blurSize, y);
+	dLoc = vec2(x , y - blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
+	loc = vec2(x, y  - blurSize * d);
 	sum += blurGain * texture2D(tex, loc ) * 0.15;
 	
 	/////////////////////////////////////////////////////////////////////////
@@ -63,24 +64,24 @@ void main( void ){
 	sum += texture2D(tex, loc) ;
 	/////////////////////////////////////////////////////////////////////////
 	
-	dLoc = vec2(x + blurSize, y);
+	dLoc = vec2(x , y + blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
-	loc = vec2(x + blurSize * d, y);
+	loc = vec2(x , y + blurSize * d);
 	sum += blurGain * texture2D(tex, loc) * 0.15;
 	
-	dLoc = vec2(x + 2.0 * blurSize, y);
+	dLoc = vec2(x , y + 2.0 * blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
-	loc = vec2(x + 2.0 * blurSize * d, y);
+	loc = vec2(x, y  + 2.0 * blurSize * d);
 	sum += blurGain * texture2D(tex, loc) * 0.12;
 	
-	dLoc = vec2(x + 3.0 * blurSize, y);
+	dLoc = vec2(x, y  + 3.0 * blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
-	loc = vec2(x + 3.0 * blurSize * d, y);
+	loc = vec2(x , y + 3.0 * blurSize * d);
 	sum += blurGain * texture2D(tex, loc) * 0.09;
 	
-	dLoc = vec2(x + 4.0 * blurSize, y);
+	dLoc = vec2(x, y  + 4.0 * blurSize);
 	d = pow( max( -focusRange + abs(focus - texture2D(depthTex, dLoc).r), 0.0 ) , depthDiffPow);
-	loc = vec2(x + 4.0 * blurSize * d, y);
+	loc = vec2(x , y + 4.0 * blurSize * d);
 	sum += blurGain * texture2D(tex, loc) * 0.05;
 
     sum.a = 1.0;

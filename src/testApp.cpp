@@ -102,6 +102,8 @@ void testApp::setup(){
 	s.depthStencilAsTexture = true;
 
 	fbo.allocate(s);
+	ping.allocate(s);
+	pong.allocate(s);
 }
 
 //--------------------------------------------------------------
@@ -120,10 +122,17 @@ void testApp::update(){
 		err = glGetError();	// we need this to clear out the error buffer.
 		ofLogNotice() << "Loaded Shader: " << err;
 
-		if (dofShader != NULL ) delete dofShader;
-		dofShader = new ofxAutoReloadedShader();
-		dofShader->setMillisBetweenFileCheck(100);
-		dofShader->load("shaders/dof");
+		if (dofShaderH != NULL ) delete dofShaderH;
+		dofShaderH = new ofxAutoReloadedShader();
+		dofShaderH->setMillisBetweenFileCheck(100);
+		dofShaderH->load("shaders/dofH");
+		err = glGetError();	// we need this to clear out the error buffer.
+		ofLogNotice() << "Loaded Shader: " << err;
+
+		if (dofShaderV != NULL ) delete dofShaderV;
+		dofShaderV = new ofxAutoReloadedShader();
+		dofShaderV->setMillisBetweenFileCheck(100);
+		dofShaderV->load("shaders/dofV");
 		err = glGetError();	// we need this to clear out the error buffer.
 		ofLogNotice() << "Loaded Shader: " << err;
 
@@ -151,7 +160,7 @@ void testApp::update(){
 	cam.setFarClip(farClip);
 
 	if(animateCam || ofGetFrameNum() < 2){
-		float r = 450;
+		float r = lightDist;
 		ofVec3f camPos = ofVec3f(
 								 r * sin(lightSpeed * ofGetElapsedTimef() * 1.2),
 								 lightH,
@@ -204,8 +213,8 @@ void testApp::draw(){
 			glutSolidTeapot(80);
 
 			ofSeedRandom(50);
-			for(int i = 0; i < 20; i++){
-				ofDrawCylinder(ofRandom(-250,250), 0, ofRandom(-300, 300), 10, 200);
+			for(int i = 0; i < 40; i++){
+				ofDrawCylinder(ofRandom(-350,350), 0, ofRandom(-350, 350), 10, 200);
 			}
 
 			if(doShader){
@@ -226,25 +235,54 @@ void testApp::draw(){
 
 
 	if(doDOFShader){
-		dofShader->begin();
-		dofShader->setUniformTexture("tex", fbo.getTextureReference(), 0);
-		dofShader->setUniformTexture("depthTex", fbo.getDepthTexture(), 1);
-		dofShader->setUniform1f("focusPoint", focusPoint);
-		dofShader->setUniform1f("width", fbo.getWidth());
-		dofShader->setUniform1f("height", fbo.getHeight());
-		dofShader->setUniform1f("blurSize", blurSize);
-		dofShader->setUniform1f("blurGain", blurGain);
-		dofShader->setUniform1f("depthDiffPow", depthDiffPow);
-		dofShader->setUniform1f("nearClip", nearClip);
-		dofShader->setUniform1f("farClip", farClip);
-		dofShader->setUniform1f("showDOF", showDOF ? 1.0f : 0.0f);
-		dofShader->setUniform1f("focusRange", focusRange);
+		ping.begin();
+		ofClear(0, 0);
 
+		dofShaderH->begin();
+		dofShaderH->setUniformTexture("tex", fbo.getTextureReference(), 0);
+		dofShaderH->setUniformTexture("depthTex", fbo.getDepthTexture(), 1);
+		dofShaderH->setUniform1f("focusPoint", focusPoint);
+		dofShaderH->setUniform1f("width", fbo.getWidth());
+		dofShaderH->setUniform1f("height", fbo.getHeight());
+		dofShaderH->setUniform1f("blurSize", blurSize);
+		dofShaderH->setUniform1f("blurGain", blurGain);
+		dofShaderH->setUniform1f("depthDiffPow", depthDiffPow);
+		dofShaderH->setUniform1f("nearClip", nearClip);
+		dofShaderH->setUniform1f("farClip", farClip);
+		dofShaderH->setUniform1f("showDOF", showDOF ? 1.0f : 0.0f);
+		dofShaderH->setUniform1f("focusRange", focusRange);
 
-		//ofRect(0, 0, ofGetWidth(), ofGetHeight()); // << no tex coords! damn!
+		//ofRect(0, 0, ofGetWidth(), ofGetHeight()); // << no tex coords on an ofRect! damn!
 		quad.draw();
 
-		dofShader->end();
+		dofShaderH->end();
+
+		ping.end();
+
+		pong.begin();
+		ofClear(0,0);
+		dofShaderV->begin();
+		dofShaderV->setUniformTexture("tex", ping.getTextureReference(), 0);
+		dofShaderV->setUniformTexture("depthTex", fbo.getDepthTexture(), 1);
+		dofShaderV->setUniform1f("focusPoint", focusPoint);
+		dofShaderV->setUniform1f("width", fbo.getWidth());
+		dofShaderV->setUniform1f("height", fbo.getHeight());
+		dofShaderV->setUniform1f("blurSize", blurSize);
+		dofShaderV->setUniform1f("blurGain", blurGain);
+		dofShaderV->setUniform1f("depthDiffPow", depthDiffPow);
+		dofShaderV->setUniform1f("nearClip", nearClip);
+		dofShaderV->setUniform1f("farClip", farClip);
+		dofShaderV->setUniform1f("showDOF", showDOF ? 1.0f : 0.0f);
+		dofShaderV->setUniform1f("focusRange", focusRange);
+
+		//ofRect(0, 0, ofGetWidth(), ofGetHeight()); // << no tex coords on an ofRect! damn!
+		quad.draw();
+
+		dofShaderV->end();
+		pong.end();
+
+		pong.draw(0, 0);
+
 	}else{
 		fbo.draw(0,0);
 	}
